@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>touch & click</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #F7F7F7;
+        }
+
+        .box {
+            width: 320px;
+            height: 400px;
+            margin: 10px auto;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box"></div>
+
+<script>
+
+    var box = document.querySelector(".box");
+    var startX, startY, endX, endY, startTime, endTime;
+    box.addEventListener("touchstart", function (e) {
+        var touch = e.targetTouches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        startTime = new Date().getTime();
+    })
+    box.addEventListener("touchend", function (e) {
+        var touch = e.changedTouches[0];
+        endX = touch.clientX;
+        endY = touch.clientY;
+        endTime = new Date().getTime();
+
+        if (Math.abs(endX-startX) < 5 && Math.abs(endY-startY) < 5 && (endTime-startTime) < 300) {
+            console.log("Tap手势触发了！！");
+        }
+
+
+
+        // console.time(); 给控制台添加一个定时器
+        console.time("timer");
+    })
+
+
+    // click事件在移动端有200-300ms的延迟
+    // 通过console.time()和console.timeEnd() 来进行验证
+    // console.time(); 给控制台添加一个定时器
+    // console.timeEnd(); 结束控制台的一个定时器
+
+    // 解决方法：
+        // 1. 设置viewport
+        // 2. 通过fastclick.js 插件
+
+
+    box.addEventListener("click", function () {
+
+        // console.timeEnd(); 结束控制台的一个定时器
+        console.timeEnd("timer");
+        console.log("click事件触发了！！");
+    })
+
+
+</script>
+
+</body>
+</html>

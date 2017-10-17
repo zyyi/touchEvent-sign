@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>zepto</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+
+<script src="./js/zepto.js"></script>
+
+<script>
+
+    // zepto.js 就是手机移动端的jquery,用法与jQuery一样
+
+    $(".box").tap(function () {
+        console.log("Tap事件触发了")
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>touch事件对象</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #F7F7F7;
+            overflow: hidden;
+        }
+
+        .box {
+            width: 100%;
+            height: 400px;
+            background-color: pink;
+            font-size: 12px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box"></div>
+
+
+<script>
+
+    // 获取元素box，给元素添加事件
+    var box = document.querySelector(".box");
+
+    // 给box添加touch事件
+
+    // 1. touches 屏幕上触点的个数的列表
+    // 2. targetTouches 绑定事件的元素上触点的个数的列表
+    // 3. changedTouches 手指离开的时候触点的个数的列表
+
+    // １.当鼠标放到box 上的时候 触发touchstart
+    box.addEventListener("touchstart", function (e) {
+        console.log(e);
+        this.innerHTML = "touches:" + e.touches.length + "targetTouches:" + e.targetTouches.length + "changedTouches:" + e.changedTouches.length;
+    })
+
+    // 2. 当手指在box上移动的时候，触发touchmove事件
+    box.addEventListener("touchmove", function (e) {
+        console.log(e);
+        this.innerHTML = "touches:" + e.touches.length + "targetTouches:" + e.targetTouches.length + "changedTouches:" + e.changedTouches.length;
+    })
+
+    // 3. 当手指离开box的时候， 触发touchend事件
+    box.addEventListener(".touchend", function (e) {
+        console.log(e);
+        this.innerHTML = "touches:" + e.touches.length + "targetTouches:" + e.targetTouches.length + "changedTouches:" + e.changedTouches.length;
+    })
+
+
+</script>
+
+
+
+
+</body>
+</html>

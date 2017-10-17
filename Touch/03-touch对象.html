@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--写全viewport的设置，才能获取到clientX/Y pageX/Y 的正确结果-->
+    <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+    <!--viewport设置没有写全的话，获取到的pageX/Y是错误的-->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>touch事件对象里的属性</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #F7F7F7;
+        }
+
+        ul {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            background-color: #CCC;
+
+        }
+
+        li {
+            height: 30px;
+            line-height: 30px;
+            padding: 0 20px;
+        }
+
+        .box {
+
+            width: 1280px;
+             /*width: 100%;*/
+            height: 200px;
+            margin: 10px auto;
+            background-color: pink;
+            margin-top: 90px;
+            line-height: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<ul>
+    <li class="client"></li>
+    <li class="page"></li>
+    <li class="screen"></li>
+</ul>
+<div class="box"></div>
+
+<script>
+    // 获取元素
+    var box = document.querySelector(".box");
+    var client = document.querySelector(".client");
+    var page = document.querySelector(".page");
+    var screen = document.querySelector(".screen");
+
+    // 1. 当手指触摸屏幕是触发  touchstart 事件
+    box.addEventListener("touchstart", function (e) {
+        console.log(e);
+    })
+
+    // 2. 当手指在屏幕上移动的时候 触发 touchmove 事件
+    box.addEventListener("touchmove", function (e) {
+        // 获取第一根手指触发的事件对象里的东西
+        var touch = e.targetTouches[0];
+        // 获取clientX/Y坐标
+        client.innerHTML = "clientX/Y为：" + Math.floor(touch.clientX) + "/" + Math.floor(touch.clientY);
+        // 获取pageX/Y坐标
+        page.innerHTML = "pageX/Y为：" + Math.floor(touch.pageX) + "/" + Math.floor(touch.pageY);
+        // 获取screenX/Y坐标
+        screen.innerHTML = "screenX/Y为：" + Math.floor(touch.screenX) + "/" + Math.floor(touch.screenY);
+
+        // 阻止滚动
+        e.preventDefault();
+    })
+
+
+    // 总结：
+    // clientX/Y: 获取的是可视区域(屏幕)的坐标 （不包含因滚动覆盖的内容）
+                // 推荐使用，因为手指只在屏幕尺寸内滑动，所以用它
+    // pageX/Y: 获取的是触点相对于HTML文档左边沿的坐标 （包含滚动）
+    // screenX/Y: 获取的是相对于屏幕左边沿的坐标 （不包含滚动）
+                // 有兼容问题，所以不用
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>drag 拖拽手势封装</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #F7F7F7;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .box {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box"></div>
+
+<script>
+    // 1.获取元素box
+    var box = document.querySelector(".box");
+    // 2.声明变量
+    var startX, startY, endX, endY, startLeft, startTop;
+    // 3.获取触摸开始时的坐标的位置以及box原始的位置
+    box.addEventListener("touchstart", function (e) {
+        var touchs = e.targetTouches[0];
+        // 触摸的位置
+        startX = touchs.clientX;
+        startY = touchs.clientY;
+        // 盒子的位置
+        startLeft = this.offsetLeft;
+        startTop = this.offsetTop;
+    })
+    // 4.获取手指移动时坐标的位置
+    box.addEventListener("touchmove", function (e) {
+        var touchs = e.changedTouches[0];
+        // 移动时手指的位置
+        endX = touchs.clientX;
+        endY = touchs.clientY;
+        // 计算盒子移动时变化的位置坐标，并赋值
+        this.style.left = startLeft + (endX - startX) + "px";
+        this.style.top = startTop + (endY - startY) + "px";
+
+    })
+
+
+
+</script>
+
+
+
+</body>
+</html>
